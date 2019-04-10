@@ -1,6 +1,7 @@
 
 <?php
 session_start();
+ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED);
  ?>
 
 
@@ -26,11 +27,13 @@ session_start();
     <p style="text-align: center"padding:25px><a href="completebank.php" class="btn btn-warning">Datenbank Lehraufgabe abrufen</a>
     </P>
     <P>
-      <div class="search">
-         <input style="text-align: center" type="text" class="searchTerm" placeholder="Suche">
-         <button style="text-align: center" type="submit" class="searchButton">
-           <i class="btn btn-danger">SUBMIT</i>
+      <div class="search" style="text-align: center">
+        <form action="search_lehraufgabe.php">
+         <input style="text-align: center" type="text" class="searchTerm" placeholder="Suche" name="suchinhalt">
+         <button class="btn btn-warning" style="text-align: center" type="submit" class="searchButton">
+           <i>SUBMIT</i>
         </button>
+      </form>
       </div>
    </div>
       </p>
@@ -50,6 +53,8 @@ session_start();
     $username="root";
     $password="xdtest";
     $database="lehrstoff";
+    $suche=$_GET["suchinhalt"];
+
 
 
     $db = mysqli_connect($servername, $username, $password, $database);
@@ -58,7 +63,9 @@ session_start();
       exit("Verbindungsfehler: ".mysqli_connect_error());
     }
 
-    $sql = "SELECT l.Aufgabe, s.Semester, b.Name, g.Bezeichnung FROM lehraufgabe l LEFT JOIN semester s ON s.S_Nr=l.S_Nr LEFT JOIN bereiche b ON b.B_Nr=l.B_Nr LEFT JOIN gegenstaende g ON g.G_NR=l.G_NR WHERE (l.Aufgabe LIKE '%.$suche.%') OR (s.Semester LIKE '%".$suche."%') OR (b.Name LIKE '%".$suche."%') OR (b.Name LIKE '%".$suche."%');";
+    mysqli_set_charset($db, 'utf8');
+
+    $sql = "SELECT l.Aufgabe, s.Semester, b.Name, g.Bezeichnung FROM lehraufgabe l JOIN semester s ON s.S_Nr=l.S_Nr JOIN bereiche b ON b.B_Nr=l.B_Nr JOIN gegenstaende g ON g.G_NR=l.G_NR WHERE (l.Aufgabe LIKE '%.$suche.%') OR (s.Semester LIKE '%.$suche.%') OR (b.Name LIKE '%".$suche."%') OR (g.Bezeichnung LIKE '%".$suche."%');";
     $result = mysqli_query($db, $sql);
 
         // output data of each row

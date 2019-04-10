@@ -107,7 +107,7 @@
       ?>
 
     <h1><p style="text-align:center">Lehrstoffdatenbank</p></h1>
-    <img src="buch.png" width="50%" height="50%">
+    <img src="images/buch.png" width="50%" height="50%">
         <h3><p style="text-align:center">Login</p></h3>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">

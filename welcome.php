@@ -26,9 +26,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <h1><p style="text-align:center">Eingeloggt als <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.</h1>
     </div>
     <p>
-    <p style="text-align: center"><a href="completebank.php" class="btn btn-warning">Datenbank Lehraufgabe abrufen</a>
-    </P>
-    <p style="text-align: center"><a href="completebank.php" class="btn btn-warning">Datenbank Lehrstoff abrufen</a>
+    <p style="text-align: center"><a href="completebank.php" class="btn btn-warning">Datenbank abrufen</a>
     </P>
 </body>
 </html>

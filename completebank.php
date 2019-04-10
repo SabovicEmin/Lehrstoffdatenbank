@@ -24,7 +24,6 @@ $suche="";
         <h1><p style="text-align:center">Eingeloggt als <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>.</h1>
     </div>
     <p>
-    <p style="text-align: center"padding:25px><a href="completebank.php" class="btn btn-warning">Datenbank Lehraufgabe abrufen</a>
     <p style="text-align: center"><a href="search_lehraufgabe.php" class="btn btn-warning">Suchen in Lehraufgabe</a>
     </P>
       <table style="width:75%"align="center" border="1">
@@ -52,6 +51,8 @@ $suche="";
       exit("Verbindungsfehler: ".mysqli_connect_error());
     }
 
+  mysqli_set_charset($db, 'utf8');
+
     $sql = "SELECT l.Aufgabe, s.Semester, b.Name, g.Bezeichnung FROM lehraufgabe l INNER JOIN semester s ON s.S_Nr=l.S_Nr INNER JOIN bereiche b ON b.B_Nr=l.B_Nr INNER JOIN gegenstaende g ON g.G_NR=l.G_NR;";
     $result = mysqli_query($db, $sql);
 
@@ -68,7 +69,7 @@ $suche="";
   </tr>
 
   <p>
-  <p style="text-align: center"padding:25px><a href="completebank.php" class="btn btn-warning">Datenbank Lehrstoff abrufen</a>
+  <p style="text-align: center"><a href="search_lehrstoff.php" class="btn btn-warning">Suchen in Lehrstoff</a>
   </P>
 
 <table style="width:75%"align="center" border="1">
